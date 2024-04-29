@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -9,7 +11,15 @@ const userSchema = new Schema({
 	},
 	password: {
 		type: String,
-		required: true
+		required: true,
+		validate: {
+			validator: function (value) {
+				const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+				console.log("regex test : ", passwordRegex.test(value));
+				return passwordRegex.test(value);
+			},
+			message: 'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character'
+		}
 	},
 	firstName: {
 		type: String
@@ -33,6 +43,21 @@ const userSchema = new Schema({
 		expirationDate: Date,
 		CVV: String
 	}
+}, {
+    validateBeforeSave: false
+});
+
+userSchema.pre('save', async function(next) {
+    const user = this;
+    if (!user.isModified('password')) return next();
+
+    try {
+        const hashedPassword = await bcrypt.hash(user.password, 10);
+        user.password = hashedPassword;
+        next();
+    } catch (error) {
+        return next(error);
+    }
 });
 
 const User = mongoose.model('user', userSchema);
