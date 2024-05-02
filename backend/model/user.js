@@ -43,8 +43,6 @@ const userSchema = new Schema({
 		expirationDate: Date,
 		CVV: String
 	}
-}, {
-    validateBeforeSave: false
 });
 
 userSchema.pre('save', async function(next) {

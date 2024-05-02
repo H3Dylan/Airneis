@@ -1,6 +1,6 @@
 const userModel = require('../../model/user')
 
-const userSignUpController = async (request, response) => {
+const userRegisterController = async (request, response) => {
     try {
         const existUser = await userModel.findOne({ email: request.body.email });
         if (existUser) {
@@ -13,13 +13,18 @@ const userSignUpController = async (request, response) => {
 
         const newUser = new userModel(request.body);
         console.log("new User: ", await newUser.save());
-        await newUser.save();
-        
-        response.status(201).json({
-            success: true,
-            error: false,
-            message: 'User created successfully!'
-        });
+
+        try {
+            await newUser.validate();
+            await newUser.save();
+            response.status(201).json({
+                success: true,
+                error: false,
+                message: 'User created successfully!'
+            });
+        } catch(error) {
+            console.log(error);
+        }
     } catch (error) {
         if (error.name === 'ValidationError') {
             const errors = Object.values(error.errors).map(err => err.message);
@@ -40,4 +45,4 @@ const userSignUpController = async (request, response) => {
     }
 };
 
-module.exports = userSignUpController
+module.exports = userRegisterController;
