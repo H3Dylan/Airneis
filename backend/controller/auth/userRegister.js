@@ -1,6 +1,7 @@
 const userModel = require('../../model/user')
 
 const userRegisterController = async (request, response) => {
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     try {
         const existUser = await userModel.findOne({ email: request.body.email });
         if (existUser) {
@@ -11,11 +12,19 @@ const userRegisterController = async (request, response) => {
             });
         }
 
+        if (!passwordRegex.test(request.body.password)) {
+            return response.status(400).json({
+                success: false,
+                error: true,
+                message: 'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character'
+            });
+        }
+
         const newUser = new userModel(request.body);
         console.log("new User: ", await newUser.save());
 
         try {
-            await newUser.validate();
+            // await newUser.validate();
             await newUser.save();
             response.status(201).json({
                 success: true,
