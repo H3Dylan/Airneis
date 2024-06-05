@@ -18,10 +18,11 @@ services:
       context: ./backend
     volumes:
       - ./backend:/app
+      - "/app/node_modules"
     ports:
-      - 5050:5000
+      - 5050:5050
     environment:
-      DB_URL: mongodb://db/airneisDB
+      DB_URL: mongodb://db:27017/airneisDB
     depends_on:
       - db
   db:
