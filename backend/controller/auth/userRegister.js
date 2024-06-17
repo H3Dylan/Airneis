@@ -1,7 +1,7 @@
 const userModel = require('../../model/user')
 
 const userRegisterController = async (request, response) => {
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$&*_\-])[A-Za-z\d!@#$&*_\-]{8,}$/;
     try {
         const existUser = await userModel.findOne({ email: request.body.email });
         if (existUser) {

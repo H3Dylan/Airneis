@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const LoginForm = () => {
+const RegisterForm = () => {
 	const [formData, setFormData] = useState({
 		email: "",
 		password: "",
+		firstName: "",
+		lastName: "",
 	});
 
 	const [message, setMessage] = useState(null);
@@ -26,14 +28,12 @@ const LoginForm = () => {
 		setError(null);
 		try {
 			const response = await axios.post(
-				"http://localhost:5050/api/auth/login",
+				"http://0.0.0.0:5050/api/auth/register",
 				formData
 			);
-			const token = response.data.token;
-			localStorage.setItem("token", token);
 			setMessage(response.data.message);
 			setTimeout(() => {
-				navigate("/");
+				navigate("/login");
 			}, 2000);
 		} catch (error) {
 			console.error(
@@ -56,7 +56,9 @@ const LoginForm = () => {
 			{error && <div className="text-red-500">{error}</div>}
 			<div className="flex flex-col gap-2 w-4/5">
 				<div className="flex flex-col gap-1">
-					<label htmlFor="email">Email</label>
+					<label htmlFor="email" className="">
+						Email
+					</label>
 					<input
 						id="email"
 						name="email"
@@ -70,7 +72,9 @@ const LoginForm = () => {
 					/>
 				</div>
 				<div className="flex flex-col gap-1">
-					<label htmlFor="password">Password</label>
+					<label htmlFor="password" className="">
+						Password
+					</label>
 					<input
 						id="password"
 						name="password"
@@ -83,12 +87,42 @@ const LoginForm = () => {
 						className="text-black p-2 rounded-md"
 					/>
 				</div>
+				<div className="flex flex-col gap-1">
+					<label htmlFor="firstName" className="">
+						First Name
+					</label>
+					<input
+						id="firstName"
+						name="firstName"
+						type="text"
+						value={formData.firstName}
+						onChange={handleChange}
+                        placeholder="Prénom"
+						required
+						className="text-black p-2 rounded-md"
+					/>
+				</div>
+				<div className="flex flex-col gap-1">
+					<label htmlFor="lastName" className="">
+						Last Name
+					</label>
+					<input
+						id="lastName"
+						name="lastName"
+						type="text"
+						value={formData.lastName}
+						onChange={handleChange}
+                        placeholder="Nom"
+						required
+						className="text-black p-2 rounded-md"
+					/>
+				</div>
 			</div>
 			<button type="submit" className="btn p-2 rounded-lg">
-				Login
+				Register
 			</button>
 		</form>
 	);
 };
 
-export default LoginForm;
+export default RegisterForm;

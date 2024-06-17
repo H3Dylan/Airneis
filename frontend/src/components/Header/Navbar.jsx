@@ -1,25 +1,25 @@
 import React from "react";
-import logo from "../../assets/Logo/logo.png"
+import { Link } from "react-router-dom";
+import logo from "../../assets/Logo/logo.svg";
 
 const Navbar = () => {
 	return (
-        <nav style={{ backgroundColor: "green" }}>
-				
-                <div>
-                    <Link>
-                    <img src="" alt="" />
-                    </Link>
-                    <Link>
-                    <img src="" alt="" />
-                    </Link>
-                    <Link>
-                    <img src="" alt="" />
-                    </Link>
-                    <Link>
-                    <img src="" alt="" />
-                    </Link>
-                </div>
-			</nav>
+        <nav>
+            <ul className="flex">
+                <li><Link >
+                <img src="" alt="" />
+                </Link></li>
+                <li><Link>
+                </Link></li>
+                <li><Link>
+                <img src="" alt="" />
+                </Link></li>
+                <li><Link>
+                <img src="" alt="" />
+                </Link></li>
+                
+            </ul>
+        </nav>
     )
 };
 
