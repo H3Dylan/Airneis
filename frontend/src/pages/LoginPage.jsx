@@ -12,7 +12,7 @@ const LoginPage = () => {
 				<LoginForm />
 				<div className="text-center">
 					<p>
-						No account ? Go to <Link to="/register">Register</Link>
+						No account ? Go to <Link to="/register" className="underline lg:no-underline lg:hover:underline">Register</Link>
 					</p>
 				</div>
 			</div>
