@@ -1,11 +1,3 @@
-.burger-icon {
-    position: fixed;
-    top: 15px;
-    right: 10px;
-    z-index: 11;
-    color: white;
-}
-
 .menu-overlay {
     position: fixed;
     top: 0;

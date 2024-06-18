@@ -7,7 +7,7 @@ const Header = () => {
 		<header className="bg-blue-500 h-20">
 			<div className="flex justify-between items-center h-full p-2.5">
 				<Link to="/" className="block">
-					<img src={Logo} alt="Airneis logo mobile" className="w-4/12 md:w-6/12" />
+					<img src={Logo} alt="Airneis logo mobile" className="logo" />
 				</Link>
 				<Navbar />
 			</div>
