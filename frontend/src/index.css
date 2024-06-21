@@ -26,6 +26,19 @@ body {
 	background-color: #336699;
 }
 
+.bg-blue-200 {
+    background-color: #A3C2E0;
+}
+
+.bg-red-200 {
+    background-color: #EBADAD;
+    color: #7A1F1F;
+}
+
+.bg-green-200 {
+    background-color: #B4D4CA;
+}
+
 .btn {
 	background-color: #ffd875;
 	border: 1px solid #a87900;

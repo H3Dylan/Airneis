@@ -7,7 +7,7 @@ const Category = () => {
 	const [categories, setCategories] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [maxCategories, setMaxCategories] = useState(3);
-
+    
 	useEffect(() => {
 		const fetchCategories = async () => {
 			try {
