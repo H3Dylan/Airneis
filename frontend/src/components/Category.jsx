@@ -74,7 +74,7 @@ const Category = () => {
 					></div>
 					<div className="flex flex-col h-3/6 justify-between items-center z-0">
 						<span className="">{category.name}</span>
-						<button className="mb-2.5">
+						<button className="mb-5 px-2.5 py-1 rounded-lg bg-blue-100 text-blue-700">
 							<Link to="/categories">Découvrir</Link>
 						</button>
 					</div>

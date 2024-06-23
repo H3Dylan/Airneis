@@ -6,7 +6,10 @@ import BurgerMenu from "./BurgerMenu";
 
 const Navbar = () => {
 	return (
-        <nav className="lg:flex lg:items-center lg:justify-between lg:w-4/6">
+        <nav className="flex justify-between items-center h-full p-2.5">
+            <Link to="/" className="block">
+					<img src={logo} alt="Airneis logo mobile" className="logo" />
+            </Link>
             <ul className="hidden text-white lg:gap-5 lg:flex">
                 <li><Link to="/categories">Catégories</Link></li>
                 <li><Link to="/products">Produits</Link></li>

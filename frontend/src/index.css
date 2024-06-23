@@ -2,6 +2,10 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+@font-face {
+	font-family: DreamAvenue;
+	src: url(./font/Dream_Avenue.otf);
+}
 :root {
 	line-height: 1.5;
 	font-weight: 400;
@@ -27,16 +31,37 @@ body {
 }
 
 .bg-blue-200 {
-    background-color: #A3C2E0;
+	background-color: #a3c2e0;
+}
+
+.bg-blue-100 {
+    background-color: #D1E0F0;
+}
+
+.text-blue-700 {
+    color: #1F3D5C;
 }
 
 .bg-red-200 {
-    background-color: #EBADAD;
-    color: #7A1F1F;
+	background-color: #ebadad;
+	
+}
+
+.text-red-700 {
+    color: #7a1f1f;
 }
 
 .bg-green-200 {
-    background-color: #B4D4CA;
+	background-color: #b4d4ca;
+    
+}
+
+.text-green-700 {
+    color: #2E5146;
+}
+
+.bg-yellow-300 {
+	background-color: #ffd875;
 }
 
 .btn {
@@ -47,4 +72,8 @@ body {
 
 .logo {
 	width: 110px;
+}
+
+.dream_avenue_font {
+	font-family: "DreamAvenue"
 }
