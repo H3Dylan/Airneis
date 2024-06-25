@@ -64,6 +64,10 @@ body {
 	background-color: #ffd875;
 }
 
+.bg-grey-100 {
+    background-color: #BABABA;
+}
+
 .btn {
 	background-color: #ffd875;
 	border: 1px solid #a87900;

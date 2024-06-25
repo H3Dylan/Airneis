@@ -1,32 +1,27 @@
 import React, { useEffect, useState } from "react";
 import Chaise from "../assets/Chaise2.png";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import getAllProducts from "../services/api/allProducts";
 
 const Product = ({ maxProducts }) => {
 	const [products, setProducts] = useState([]);
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		const fetchProducts = async () => {
-			try {
-				const response = await axios.get(
-					"http://localhost:5050/api/articles/"
-				);
-				if (response.data && Array.isArray(response.data.data)) {
-					setProducts(response.data.data);
-				} else {
-					console.error("Unexpected response structure:", response.data);
-				}
-				setLoading(false);
-			} catch (error) {
-				console.error("Error fetching products:", error);
-				setLoading(false);
-			}
-		};
+        const fetchProducts = async () => {
+            try {
+                const allProducts = await getAllProducts();
+                setProducts(allProducts.data);
+                console.log(allProducts.data);
+                setLoading(false);
+            } catch (error) {
+                console.error('Error fetching all products:', error);
+                setLoading(false);
+            }
+        }; 
 
-		fetchProducts();
-	}, []);
+        fetchProducts();
+    }, []);
 
 	if (loading) {
 		return <div>Chargement...</div>;

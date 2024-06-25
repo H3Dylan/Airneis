@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Vector from "../assets/Chaise.jpg";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import getAllCategories from "../services/api/allCategories";
 
 const Category = () => {
 	const [categories, setCategories] = useState([]);
@@ -9,28 +9,19 @@ const Category = () => {
 	const [maxCategories, setMaxCategories] = useState(3);
     
 	useEffect(() => {
-		const fetchCategories = async () => {
-			try {
-				const response = await axios.get(
-					"http://localhost:5050/api/categories/"
-				);
-				if (response.data && Array.isArray(response.data.data)) {
-					setCategories(response.data.data);
-				} else {
-					console.error(
-						"Unexpected response structure:",
-						response.data
-					);
-				}
-				setLoading(false);
-			} catch (error) {
-				console.error("Error fetching categories:", error);
-				setLoading(false);
-			}
-		};
+        const fetchCategories = async () => {
+            try {
+                const allCategories = await getAllCategories();
+                setCategories(allCategories.data);
+                console.log(allCategories.data);
+                setLoading(false);
+            } catch (error) {
+                console.error('Error fetching all categories:', error);
+            }
+        }; 
 
-		fetchCategories();
-	}, []);
+        fetchCategories();
+    }, []);
 
 	useEffect(() => {
 		const updateMaxCategories = () => {
@@ -42,13 +33,10 @@ const Category = () => {
 			}
 		};
 
-		// Initial check
 		updateMaxCategories();
 
-		// Add event listener for window resize
 		window.addEventListener("resize", updateMaxCategories);
 
-		// Clean up event listener on component unmount
 		return () => window.removeEventListener("resize", updateMaxCategories);
 	}, []);
 
@@ -75,7 +63,7 @@ const Category = () => {
 					<div className="flex flex-col h-3/6 justify-between items-center z-0">
 						<span className="">{category.name}</span>
 						<button className="mb-5 px-2.5 py-1 rounded-lg bg-blue-100 text-blue-700">
-							<Link to="/categories">Découvrir</Link>
+							<Link to={category.name}>Découvrir</Link>
 						</button>
 					</div>
 				</div>
