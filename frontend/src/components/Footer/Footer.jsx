@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/Logo/logo_black.svg";
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
+import PrivateRoute from "../../routes/PrivateRoute";
 
 const Footer = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        setIsLoggedIn(false);
+        
+    };
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            setIsLoggedIn(true);
+        }
+    }, []);
+
 	return (
         <footer className="bg-yellow-300 p-5 text-center">
             <div className="flex flex-col gap-3 justify-evenly mb-3 md:flex-row">
@@ -16,8 +32,18 @@ const Footer = () => {
                 </div>
                 <div className="flex flex-col">
                     <h4 className="font-semibold">Mon compte</h4>
-                    <Link to="/login">Se connecter</Link>
-                    <Link>Etat des commandes</Link>
+                    {!isLoggedIn && (
+                        <Link to="/login">Se connecter</Link>
+                    )}
+                    {isLoggedIn && (
+                        <Link
+                        onClick={handleLogout}>
+                            Se déconnecter
+                        </Link>
+                    )}
+                    <PrivateRoute>
+                        <Link to="orders">Etat des commandes</Link>
+                    </PrivateRoute>
                     <Link to="/register">S'enregister</Link>
                 </div>
                 <div className="flex flex-col">

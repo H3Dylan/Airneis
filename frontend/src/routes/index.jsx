@@ -3,8 +3,9 @@ import HomePage from "../pages/HomePage.jsx";
 import LoginPage from "../pages/LoginPage.jsx";
 import RegisterPage from "../pages/RegisterPage.jsx";
 import NotFoundPage from "../pages/NotFoundPage.jsx";
-import AllCategories from "../pages/AllCategories.jsx";
-import AllProducts from "../pages/AllProducts.jsx";
+import AllCategoriesPage from "../pages/AllCategoriesPage.jsx";
+import AllProductsPage from "../pages/AllProductsPage.jsx";
+import ProfilePage from "../pages/ProfilePage.jsx";
 
 const router = createBrowserRouter([
 	{
@@ -24,12 +25,17 @@ const router = createBrowserRouter([
 	},
     {
         path: "/categories",
-        element: <AllCategories />,
+        element: <AllCategoriesPage />,
         errorElement: <NotFoundPage />
     },
     {
         path: "/products",
-        element: <AllProducts />,
+        element: <AllProductsPage />,
+        errorElement: <NotFoundPage />
+    },
+    {
+        path: "/profile",
+        element: <ProfilePage />,
         errorElement: <NotFoundPage />
     }
 ]);
