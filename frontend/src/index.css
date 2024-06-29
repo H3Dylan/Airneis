@@ -1,68 +1,83 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@font-face {
+	font-family: DreamAvenue;
+	src: url(./font/Dream_Avenue.otf);
+}
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	line-height: 1.5;
+	font-weight: 400;
 }
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+@font-face {
+	font-family: "DreamAvenue";
+	src: url("./font/Dream_Avenue.ttf") format("ttf"),
+		url("./font/Dream_Avenue.otf") format("otf");
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Quicksand", sans-serif;
+	background-color: #d8e9e3;
+	color: #000000;
+	min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.bg-blue-500 {
+	background-color: #336699;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.bg-blue-200 {
+	background-color: #a3c2e0;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.bg-blue-100 {
+    background-color: #D1E0F0;
+}
+
+.text-blue-700 {
+    color: #1F3D5C;
+}
+
+.bg-red-200 {
+	background-color: #ebadad;
+	
+}
+
+.text-red-700 {
+    color: #7a1f1f;
+}
+
+.bg-green-200 {
+	background-color: #b4d4ca;
+    
+}
+
+.text-green-700 {
+    color: #2E5146;
+}
+
+.bg-yellow-300 {
+	background-color: #ffd875;
+}
+
+.bg-grey-100 {
+    background-color: #BABABA;
+}
+
+.btn {
+	background-color: #ffd875;
+	border: 1px solid #a87900;
+	color: #a87900;
+}
+
+.logo {
+	width: 110px;
+}
+
+.dream_avenue_font {
+	font-family: "DreamAvenue"
 }
