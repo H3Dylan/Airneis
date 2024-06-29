@@ -5,7 +5,7 @@ import RegisterPage from "../pages/RegisterPage.jsx";
 import NotFoundPage from "../pages/NotFoundPage.jsx";
 import AllCategoriesPage from "../pages/AllCategoriesPage.jsx";
 import AllProductsPage from "../pages/AllProductsPage.jsx";
-import ProfilePage from "../pages/ProfilePage.jsx";
+import ProductPage from "../pages/ProductPage.jsx";
 
 const router = createBrowserRouter([
 	{
@@ -16,28 +16,28 @@ const router = createBrowserRouter([
 	{
 		path: "/login",
 		element: <LoginPage />,
-        errorElement: <NotFoundPage />,
+		errorElement: <NotFoundPage />,
 	},
 	{
 		path: "/register",
 		element: <RegisterPage />,
-        errorElement: <NotFoundPage />,
+		errorElement: <NotFoundPage />,
 	},
-    {
-        path: "/categories",
-        element: <AllCategoriesPage />,
-        errorElement: <NotFoundPage />
-    },
-    {
-        path: "/products",
-        element: <AllProductsPage />,
-        errorElement: <NotFoundPage />
-    },
-    {
-        path: "/profile",
-        element: <ProfilePage />,
-        errorElement: <NotFoundPage />
-    }
+	{
+		path: "/categories",
+		element: <AllCategoriesPage />,
+		errorElement: <NotFoundPage />,
+	},
+	{
+		path: "/products",
+		element: <AllProductsPage />,
+		errorElement: <NotFoundPage />,
+	},
+	{
+		path: "/product/:product_id",
+		element: <ProductPage />,
+		errorElement: <NotFoundPage />,
+	},
 ]);
 
 export default router;

@@ -36,7 +36,7 @@ const Product = ({ maxProducts }) => {
 		
             <div className="flex flex-wrap flex-2 justify-center gap-3.5 items-center md:grid md:grid-rows-2 md:grid-cols-2 md:gap-12 md:w-auto lg:flex lg:justify-items-center lg:gap-16">
                 {displayedProducts.map((product, index) => (
-                    <Link key={product._id} to={`/products/${product._id}`}>
+                    <Link key={product._id} to={`/product/${product._id}`}>
                         <div className={`relative h-96 w-72 flex flex-col items-center justify-evenly pb-5 text-white rounded-xl ${backgroundColors[index % backgroundColors.length]}`}>
                         <img src={Chaise} className="bg-cover bg-center rounded-xl transition-all duration-300" alt="" />
                         <div className={`flex justify-evenly w-full ${textColors[index % textColors.length]}`}>

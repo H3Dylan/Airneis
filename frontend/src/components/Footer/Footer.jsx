@@ -41,9 +41,7 @@ const Footer = () => {
                             Se déconnecter
                         </Link>
                     )}
-                    <PrivateRoute>
-                        <Link to="orders">Etat des commandes</Link>
-                    </PrivateRoute>
+                    <PrivateRoute to="/orders">État des commandes</PrivateRoute>
                     <Link to="/register">S'enregister</Link>
                 </div>
                 <div className="flex flex-col">
