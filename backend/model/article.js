@@ -17,11 +17,16 @@ const articleSchema = new Schema({
         type: Number,
         required: true
     },
-    description: {
-        type: String
+    shortDescription: {
+        type: String,
+        required: true
+    },
+    detailsDescription: {
+        type: String,
+        required: true
     },
     materials: {
-        type: String
+        type: [String]
     },
     createdAt: {
         type: Date,
