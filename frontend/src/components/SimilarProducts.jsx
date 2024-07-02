@@ -10,8 +10,6 @@ const SimilarProducts = ({ category, product }) => {
         const fetchSimilarProduct = async () => {
             try {
                 const similarProducts = await getSimilarProducts(category, product);
-                console.log("FETCH SIMILAR PRODUCT", category);
-                console.log("SIMILAR PRODUCTS", similarProducts);
                 setSimilarProducts(similarProducts);
             } catch (error) {
                 console.error("Error fetching similar products:", error);
@@ -21,7 +19,7 @@ const SimilarProducts = ({ category, product }) => {
         if (category) {
             fetchSimilarProduct();
         }
-    }, [category]);
+    }, [category, product]);
 
     useEffect(() => {
         window.scrollTo(0, 0);
