@@ -30,13 +30,13 @@ const AllProducts = () => {
             </div>
             <div className="flex flex-col items-center gap-2 mt-8 mb-12 md:flex-row md:flex-wrap md:justify-evenly lg:max-w-5xl lg:mx-auto">
                 {products.map((product) => (
-                    <Link key={product._id} to={`/products/${product._id}`}>
+                    <Link key={product._id} to={`/product/${product._id}`}>
                         <div className={"relative h-96 w-72 flex flex-col items-center justify-evenly pb-5 text-white rounded-xl bg-grey-100"}>
                             <img src={Img} className="bg-cover bg-center rounded-xl transition-all duration-300" alt="" />
                             <div className={"flex justify-evenly w-full"}>
                                 <div>
                                     <p className="font-bold">{product.name}</p>
-                                    <p className="">{product.description}</p>
+                                    <p className="">{product.shortDescription}</p>
                                 </div>
                                 <div className="flex items-center">
                                     <p className="font-bold">{product.price}€</p>
