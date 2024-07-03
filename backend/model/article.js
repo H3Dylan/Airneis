@@ -3,7 +3,9 @@ const Schema = mongoose.Schema;
 
 const articleSchema = new Schema({
     category: {
-        type: String
+        type: Schema.Types.ObjectId,
+        ref: 'category',
+        required: true
     },
     name: {
         type: String,
@@ -17,11 +19,16 @@ const articleSchema = new Schema({
         type: Number,
         required: true
     },
-    description: {
-        type: String
+    shortDescription: {
+        type: String,
+        required: true
+    },
+    detailsDescription: {
+        type: String,
+        required: true
     },
     materials: {
-        type: String
+        type: [String]
     },
     createdAt: {
         type: Date,

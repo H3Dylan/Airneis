@@ -1,24 +1,35 @@
 const articleModel = require('../../model/article');
+const categoryModel = require('../../model/category');
 
 const createArticleController = async (request, response) => {
     try {
-        const { category, name, price, stock, description, materials } = request.body;
-
-        if (!name || !price || !stock) {
+        const { category, name, price, stock, shortDescription, detailsDescription, materials } = request.body;
+        const categoryObject = await categoryModel.findOne({ name: category });
+        
+        if (!name || !price || !stock || !shortDescription || !detailsDescription) {
             return response.status(400).json({
                 success: false,
                 error: true,
-                message: 'Name, price, and stock are required fields'
+                message: 'Name, price, stock and different decriptions are required fields'
+            });
+        }
+
+        if (!categoryObject) {
+            return response.status(404).json({
+                success: false,
+                error: true,
+                message: 'Category not found'
             });
         }
 
         const newArticle = new articleModel({
-            category,
-            name,
-            price,
-            stock,
-            description,
-            materials
+            category: categoryObject._id,
+            name: name,
+            price: price,
+            stock: stock,
+            shortDescription: shortDescription,
+            detailsDescription: detailsDescription,
+            materials: materials,
         });
 
         const savedArticle = await newArticle.save();
