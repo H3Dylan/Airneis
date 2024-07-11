@@ -6,6 +6,7 @@ import NotFoundPage from "../pages/NotFoundPage.jsx";
 import AllCategoriesPage from "../pages/AllCategoriesPage.jsx";
 import AllProductsPage from "../pages/AllProductsPage.jsx";
 import ProductPage from "../pages/ProductPage.jsx";
+import CartPage from "../pages/CartPage.jsx";
 
 const router = createBrowserRouter([
 	{
@@ -38,6 +39,11 @@ const router = createBrowserRouter([
 		element: <ProductPage />,
 		errorElement: <NotFoundPage />,
 	},
+    {
+        path: "/cart",
+        element: <CartPage />,
+        errorElement: <NotFoundPage />
+    }
 ]);
 
 export default router;
