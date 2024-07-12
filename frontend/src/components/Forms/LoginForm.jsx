@@ -84,7 +84,7 @@ const LoginForm = () => {
 					/>
 				</div>
 			</div>
-			<button type="submit" className="btn p-2 rounded-lg">
+			<button type="submit" className="btn_secondary p-2 rounded-lg">
 				Login
 			</button>
 		</form>

@@ -1,11 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { HiMiniMagnifyingGlass, HiOutlineShoppingCart, HiOutlineUserCircle } from "react-icons/hi2";
+import { HiMiniMagnifyingGlass } from "react-icons/hi2";
+import { useCart } from '../CartContext';
 import logo from "../../assets/Logo/logo.svg";
 import BurgerMenu from "./BurgerMenu";
 import ProfileDropdown from "../ProfileDropdown";
+import CartIcon from "./CartIcon";
 
 const Navbar = () => {
+    const { getCartCount } = useCart();
 	return (
         <nav className="flex justify-between items-center h-full p-2.5">
             <Link to="/" className="block">
@@ -19,7 +22,7 @@ const Navbar = () => {
             </ul>
             <ul className="flex items-center h-12 text-white gap-3 lg:gap-7">
                 <li><Link to="/search"><HiMiniMagnifyingGlass size={30}/></Link></li>
-                <li><Link to="/cart"><HiOutlineShoppingCart size={30}/></Link></li>
+                <CartIcon />
                 <li><ProfileDropdown /></li>
                 <li className="lg:hidden"><BurgerMenu /></li>
             </ul>

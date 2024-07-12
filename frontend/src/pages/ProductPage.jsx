@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import getProductById from "../services/api/productById";
@@ -11,11 +11,12 @@ import Carousel1 from '../assets/carousel1.jpg';
 import big from '../assets/big.jpg';
 import 'swiper/css';
 import SimilarProducts from "../components/SimilarProducts";
+import { CartContext } from "../components/CartContext";
 
 const ProductPage = () => {
 	const [product, setProduct] = useState('');
-	// const [loading, setLoading] = useState(true);
 	const { product_id } = useParams();
+    const { addToCart } = useContext(CartContext);
 
 	useEffect(() => {
 		const fetchProduct = async () => {
@@ -23,18 +24,13 @@ const ProductPage = () => {
 				const product = await getProductById(product_id);
 				console.log(product);
 				setProduct(product);
-				// setLoading(false);
 			} catch (error) {
 				console.error("Error fetching a product:", error);
-				// setLoading(false);
 			}
 		};
-
-        
-
 		fetchProduct();
         
-	}, []);
+	}, [product_id]);
 
     
 
@@ -78,11 +74,17 @@ const ProductPage = () => {
                             <p className="text-justify py-5 border-y border-solid border-gray-400">{product.detailsDescription}</p>
                         </div>
                         <div className="my-auto pt-5 flex justify-center">
-                            <button 
-                                onClick={handleAddToCart}
+                            {product.stock != 0 ?
+                            (<button
+                                onClick={() => addToCart(product)} 
                                 className="btn p-2 rounded-lg">
                                 Ajouter au panier
-                            </button>
+                            </button>) : 
+                            (<button
+                                className="btn p-2 rounded-lg">
+                                Indisponible
+                            </button>)}
+                            
                         </div>
                     </div>
                 </div>

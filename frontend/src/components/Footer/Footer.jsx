@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../../assets/Logo/logo_black.svg";
+import Logo from "../../assets/Logo/logo.svg";
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 import PrivateRoute from "../../routes/PrivateRoute";
 
@@ -21,7 +21,7 @@ const Footer = () => {
     }, []);
 
 	return (
-        <footer className="bg-yellow-300 p-5 text-center">
+        <footer className="bg-blue-500 p-5 text-white text-center">
             <div className="flex flex-col gap-3 justify-evenly mb-3 md:flex-row">
                 <div className="flex flex-col">
                     <h4 className="font-semibold">Informations légales</h4>
