@@ -63,7 +63,8 @@ const ShippingForm = ({ userInfo, totalAmount }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        navigate("/payment", { state: { totalAmount }});
+        formData.label = selectedAddress
+        navigate("/payment", { state: { shippingAddress:formData, totalAmount }});
     };
 
     return (
