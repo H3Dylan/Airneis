@@ -1,13 +1,18 @@
 const OrderModel = require('../../model/order');
 
+function generateUniqueOrderId() {
+    return 'ORD-' + Date.now() + '-' + Math.floor(Math.random() * 10000);
+}
 const createOrderController = async (request, response) => {
     try {
-        const { userId, articles,totalPrice } = request.body;
-
+        const { userId, articles, shippingAddress, totalAmount } = request.body;
+        console.log(request.body);
         const order = new OrderModel({
+            orderId: generateUniqueOrderId(),
             userId,
             articles,
-            totalPrice
+            shippingAddress,
+            totalAmount
         });
 
         await order.save();
