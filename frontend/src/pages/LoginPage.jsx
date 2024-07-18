@@ -7,6 +7,7 @@ import { useAuth } from "../context/AuthContext";
 const LoginPage = () => {
     const { isAuthenticated } = useAuth();
     const navigate = useNavigate();
+    const userInfo = useAuth()
 
     useEffect(() => {
         if (isAuthenticated) {
