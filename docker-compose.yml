@@ -6,13 +6,13 @@ services:
     build: 
       context: ./frontend
     ports:
-    # Host:Container
       - 5173:5173
     depends_on:
       - db
     volumes:
       - "./frontend:/app"
       - "/app/node_modules"
+  
   api:
     build:
       context: ./backend
@@ -25,12 +25,14 @@ services:
       DB_URL: mongodb://db:27017/airneisDB
     depends_on:
       - db
+
   db:
     image: mongo
     ports:
       - 27017:27017
     volumes:
       - database:/data/db
+
   mongo-express:
     image: mongo-express
     ports:
@@ -43,6 +45,16 @@ services:
     depends_on:
       - db
 
+  backoffice:
+    build:
+      context: ./backoffice
+    ports:
+      - 3001:3001
+    depends_on:
+      - api
+    volumes:
+      - "./backoffice:/app"
+      - "/app/node_modules"
 
 volumes:
   database:
