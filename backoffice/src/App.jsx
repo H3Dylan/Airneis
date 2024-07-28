@@ -1,7 +1,7 @@
-// src/App.js
+// src/App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import ArticleList from './components/ArticleList';
+import ArticleList from './components/ArticleList.jsx';
 
 const App = () => {
     return (
