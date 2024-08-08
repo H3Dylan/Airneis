@@ -19,12 +19,12 @@ const CartPage = () => {
 	const navigate = useNavigate();
 	const { isAuthenticated } = useAuth();
 
-	const handleQuantityChange = (productId, quantity) => {
-		const parsedQuantity = parseInt(quantity, 10);
-		if (!isNaN(parsedQuantity) && parsedQuantity > 0) {
-			updateQuantity(productId, parsedQuantity);
-		}
-	};
+	const handleQuantityChange = (productId, quantity, maxStock) => {
+        const parsedQuantity = parseInt(quantity, 10);
+        if (!isNaN(parsedQuantity) && parsedQuantity > 0 && parsedQuantity <= maxStock) {
+            updateQuantity(productId, parsedQuantity);
+        }
+    };
 
 	const getTotalPrice = () => {
 		return cart
@@ -59,74 +59,63 @@ const CartPage = () => {
 				</h2>
 				<div className="flex flex-col md:flex-row md:mx-auto md:justify-evenly md:min-w-[600px]  md:max-w-5xl">
 					<div>
-						{cart.length > 0 ? (
-							cart.map((item, index) => (
-								<div
-									key={index}
-									className="flex justify-between items-center gap-1 text-center p-2 border-b border-gray-300"
-								>
-									<div className="flex items-center">
-										<div className="w-2/4 max-w-40">
-											<img src={Img} alt="" />
-										</div>
-										<div>
-											<h3 className="font-semibold">
-												{item.name}
-											</h3>
-											<p>{item.shortDescription}</p>
-										</div>
-									</div>
-									<div className="flex flex-col items-center gap-1">
-										<p>
-											{(
-												item.price * item.quantity
-											).toFixed(2)}{" "}
-											€
-										</p>
-										<div className="flex gap-1 justify-end">
-											<button
-												onClick={() =>
-													removeFromCart(item._id)
-												}
-												className="p-2 rounded-full"
-											>
-												-
-											</button>
-											<input
-												type="number"
-												value={item.quantity}
-												max={100}
-												onChange={(e) =>
-													handleQuantityChange(
-														item._id,
-														e.target.value
-													)
-												}
-												className="w-16 p-1 border rounded text-center"
-											/>
-											<button
-												onClick={() => addToCart(item)}
-												className="p-2 rounded-full"
-											>
-												+
-											</button>
-										</div>
-										<div>
-											<HiOutlineTrash
-												size={30}
-												onClick={() =>
-													deleteFromCart(item._id)
-												}
-												className="hover:cursor-pointer"
-											/>
-										</div>
-									</div>
-								</div>
-							))
-						) : (
-							<div className="text-center">
-								<p>Votre panier est vide.</p>
-								{!isAuthenticated && (
+                        {cart.length > 0 ? (
+                            cart.map((item, index) => (
+                                <div
+                                    key={index}
+                                    className="flex justify-between items-center gap-1 text-center p-2 border-b border-gray-300"
+                                >
+                                    <div className="flex items-center">
+                                        <div className="w-2/4 max-w-40">
+                                            <img src={Img} alt="" />
+                                        </div>
+                                        <div>
+                                            <h3 className="font-semibold">{item.name}</h3>
+                                            <p>{item.shortDescription}</p>
+                                            <p>Stock disponible: {item.stock}</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-col items-center gap-1">
+                                        <p>{(item.price * item.quantity).toFixed(2)} €</p>
+                                        <div className="flex gap-1 justify-end">
+                                            <button
+                                                onClick={() => removeFromCart(item._id)}
+                                                className="p-2 rounded-full"
+                                            >
+                                                -
+                                            </button>
+                                            <input
+                                                type="number"
+                                                value={item.quantity}
+                                                max={item.stock}
+                                                onChange={(e) =>
+                                                    handleQuantityChange(item._id, e.target.value, item.stock)
+                                                }
+                                                className="w-16 p-1 border rounded text-center"
+                                            />
+                                            {item.quantity < item.stock && (
+                                                <button
+                                                    onClick={() => addToCart(item)}
+                                                    className="p-2 rounded-full"
+                                                >
+                                                    +
+                                                </button>
+                                            )}
+                                        </div>
+                                        <div>
+                                            <HiOutlineTrash
+                                                size={30}
+                                                onClick={() => deleteFromCart(item._id)}
+                                                className="hover:cursor-pointer"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <div className="text-center">
+                                <p>Votre panier est vide.</p>
+                                {!isAuthenticated && (
                                     <div className="flex flex-col items-center mt-2">
                                         <Link to="/login" className="underline">Connectez-vous</Link>
                                         <p>ou</p>
