@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const ShippingForm = ({ userInfo, totalAmount }) => {
@@ -69,146 +69,150 @@ const ShippingForm = ({ userInfo, totalAmount }) => {
 
     return (
         <form
-            className="flex flex-col gap-4 p-4 shadow-md"
+            className="flex flex-col gap-4 p-4 shadow-md items-center"
             onSubmit={handleSubmit}
         >
-            <h2 className="text-xl font-bold mb-4">Adresse de Livraison</h2>
-
-            {userInfo.shippingAddresses && userInfo.shippingAddresses.length > 0 && (
-                <div className="mb-4">
-                    <label htmlFor="addressSelect" className="block mb-2">
-                        Choisir une adresse
-                    </label>
-                    <select
-                        id="addressSelect"
-                        value={selectedAddress}
-                        onChange={handleAddressChange}
-                        className="w-full p-2 border border-gray-300 rounded"
-                    >
-                        {userInfo.shippingAddresses.map((addr) => (
-                            <option key={addr._id} value={addr.label}>
-                                {addr.label}
-                            </option>
-                        ))}
-                    </select>
+            <div className="md:flex md:justify-center md:items-center md:gap-12">
+                <div >
+                    {userInfo.shippingAddresses && userInfo.shippingAddresses.length > 0 && (
+                        <div className="mb-4">
+                            <label htmlFor="addressSelect" className="block mb-2">
+                                Choisir une adresse
+                            </label>
+                            <select
+                                id="addressSelect"
+                                value={selectedAddress}
+                                onChange={handleAddressChange}
+                                className="w-full p-2 border border-gray-300 rounded"
+                            >
+                                {userInfo.shippingAddresses.map((addr) => (
+                                    <option key={addr._id} value={addr.label}>
+                                        {addr.label}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                    )}
+                    <div className="mb-4">
+                        <label htmlFor="firstName" className="block mb-2">
+                            Prénom*
+                        </label>
+                        <input
+                            id="firstName"
+                            name="firstName"
+                            type="text"
+                            value={formData.firstName}
+                            onChange={handleInputChange}
+                            className="w-full p-2 border border-gray-300 rounded"
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="lastName" className="block mb-2">
+                            Nom*
+                        </label>
+                        <input
+                            id="lastName"
+                            name="lastName"
+                            type="text"
+                            value={formData.lastName}
+                            onChange={handleInputChange}
+                            className="w-full p-2 border border-gray-300 rounded"
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="addressLine1" className="block mb-2">
+                            Adresse 1*
+                        </label>
+                        <input
+                            id="addressLine1"
+                            name="addressLine1"
+                            type="text"
+                            value={formData.addressLine1}
+                            onChange={handleInputChange}
+                            className="w-full p-2 border border-gray-300 rounded"
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="addressLine2" className="block mb-2">
+                            Adresse 2 (optionnel)
+                        </label>
+                        <input
+                            id="addressLine2"
+                            name="addressLine2"
+                            type="text"
+                            value={formData.addressLine2}
+                            onChange={handleInputChange}
+                            className="w-full p-2 border border-gray-300 rounded"
+                        />
+                    </div>
                 </div>
-            )}
-            <div className="mb-4">
-                <label htmlFor="firstName" className="block mb-2">
-                    Prénom
-                </label>
-                <input
-                    id="firstName"
-                    name="firstName"
-                    type="text"
-                    value={formData.firstName}
-                    onChange={handleInputChange}
-                    className="w-full p-2 border border-gray-300 rounded"
-                />
-            </div>
-            <div className="mb-4">
-                <label htmlFor="lastName" className="block mb-2">
-                    Nom
-                </label>
-                <input
-                    id="lastName"
-                    name="lastName"
-                    type="text"
-                    value={formData.lastName}
-                    onChange={handleInputChange}
-                    className="w-full p-2 border border-gray-300 rounded"
-                />
-            </div>
-            <div className="mb-4">
-                <label htmlFor="addressLine1" className="block mb-2">
-                    Adresse 1
-                </label>
-                <input
-                    id="addressLine1"
-                    name="addressLine1"
-                    type="text"
-                    value={formData.addressLine1}
-                    onChange={handleInputChange}
-                    className="w-full p-2 border border-gray-300 rounded"
-                />
-            </div>
-            <div className="mb-4">
-                <label htmlFor="addressLine2" className="block mb-2">
-                    Adresse 2 (optionnel)
-                </label>
-                <input
-                    id="addressLine2"
-                    name="addressLine2"
-                    type="text"
-                    value={formData.addressLine2}
-                    onChange={handleInputChange}
-                    className="w-full p-2 border border-gray-300 rounded"
-                />
-            </div>
-            <div className="mb-4">
-                <label htmlFor="city" className="block mb-2">
-                    Ville
-                </label>
-                <input
-                    id="city"
-                    name="city"
-                    type="text"
-                    value={formData.city}
-                    onChange={handleInputChange}
-                    className="w-full p-2 border border-gray-300 rounded"
-                />
-            </div>
-            <div className="mb-4">
-                <label htmlFor="region" className="block mb-2">
-                    Région
-                </label>
-                <input
-                    id="region"
-                    name="region"
-                    type="text"
-                    value={formData.region}
-                    onChange={handleInputChange}
-                    className="w-full p-2 border border-gray-300 rounded"
-                />
-            </div>
-            <div className="mb-4">
-                <label htmlFor="postalCode" className="block mb-2">
-                    Code Postal
-                </label>
-                <input
-                    id="postalCode"
-                    name="postalCode"
-                    type="text"
-                    value={formData.postalCode}
-                    onChange={handleInputChange}
-                    className="w-full p-2 border border-gray-300 rounded"
-                />
-            </div>
-            <div className="mb-4">
-                <label htmlFor="country" className="block mb-2">
-                    Pays
-                </label>
-                <input
-                    id="country"
-                    name="country"
-                    type="text"
-                    value={formData.country}
-                    onChange={handleInputChange}
-                    className="w-full p-2 border border-gray-300 rounded"
-                />
-            </div>
-            <div className="mb-4">
-                <label htmlFor="phoneNumber" className="block mb-2">
-                    Numéro de téléphone mobile
-                </label>
-                <input
-                    id="phoneNumber"
-                    name="phoneNumber"
-                    type="text"
-                    value={formData.phoneNumber}
-                    onChange={handleInputChange}
-                    className="w-full p-2 border border-gray-300 rounded"
-                />
+                <div>
+                    <div className="mb-4">
+                        <label htmlFor="city" className="block mb-2">
+                            Ville
+                        </label>
+                        <input
+                            id="city"
+                            name="city"
+                            type="text"
+                            value={formData.city}
+                            onChange={handleInputChange}
+                            className="w-full p-2 border border-gray-300 rounded"
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="region" className="block mb-2">
+                            Région
+                        </label>
+                        <input
+                            id="region"
+                            name="region"
+                            type="text"
+                            value={formData.region}
+                            onChange={handleInputChange}
+                            className="w-full p-2 border border-gray-300 rounded"
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="postalCode" className="block mb-2">
+                            Code Postal
+                        </label>
+                        <input
+                            id="postalCode"
+                            name="postalCode"
+                            type="text"
+                            value={formData.postalCode}
+                            onChange={handleInputChange}
+                            className="w-full p-2 border border-gray-300 rounded"
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="country" className="block mb-2">
+                            Pays
+                        </label>
+                        <input
+                            id="country"
+                            name="country"
+                            type="text"
+                            value={formData.country}
+                            onChange={handleInputChange}
+                            className="w-full p-2 border border-gray-300 rounded"
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="phoneNumber" className="block mb-2">
+                            Numéro de téléphone mobile
+                        </label>
+                        <input
+                            id="phoneNumber"
+                            name="phoneNumber"
+                            type="text"
+                            value={formData.phoneNumber}
+                            onChange={handleInputChange}
+                            className="w-full p-2 border border-gray-300 rounded"
+                        />
+                    </div>
+                </div>
             </div>
             <button type="submit" className="bg-blue-500 text-white p-2 rounded">
                 Enregistrer et Continuer

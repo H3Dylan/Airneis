@@ -53,7 +53,7 @@ const CartPage = () => {
 	return (
 		<>
 			<Header />
-			<div className="my-12">
+			<div className="my-12 flex-1">
 				<h2 className="text-2xl text-center font-bold mb-4">
 					Mon Panier
 				</h2>

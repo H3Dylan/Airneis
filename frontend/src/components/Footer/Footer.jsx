@@ -21,7 +21,7 @@ const Footer = () => {
     }, []);
 
 	return (
-        <footer className="bg-blue-500 p-5 text-white text-center">
+        <footer className="hidden bg-blue-500 p-5 text-white text-center lg:block">
             <div className="flex flex-col gap-3 justify-evenly mb-3 md:flex-row">
                 <div className="flex flex-col">
                     <h4 className="font-semibold">Informations légales</h4>

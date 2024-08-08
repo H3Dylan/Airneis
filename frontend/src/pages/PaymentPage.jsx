@@ -5,6 +5,8 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import PaymentForm from "../components/Forms/PaymentForm";
 import getUserIdFromToken from "../services/api/getUserId";
+import Header from "../components/Header/Header";
+import Footer from "../components/Footer/Footer";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_API_PUBLIC_KEY);
 
@@ -17,9 +19,10 @@ const PaymentPage = () => {
 
 	console.log("PaymentPage", totalAmount);
 	const handlePaymentSuccess = (paymentIntent) => {
+        const articles = localStorage.getItem(`cart`);
 		const order = {
 			userId: getUserIdFromToken(),
-			articles: localStorage.getItem(`cart`),
+			articles: JSON.parse(articles),
 			shippingAddress,
 			totalAmount: totalAmount,
 		};
@@ -42,16 +45,22 @@ const PaymentPage = () => {
 	};
 
 	return (
-		<div>
-			<h1>Page de Paiement</h1>
-			<Elements stripe={stripePromise}>
-				<PaymentForm
-					onPaymentSuccess={handlePaymentSuccess}
-					shippingAddress={shippingAddress}
-					totalAmount={totalAmount}
-				/>
-			</Elements>
-		</div>
+        <>
+            <Header />
+            <div className="flex-1">
+                <div>
+                    <h2 className="text-xl font-bold my-4 text-center">Paiement</h2>
+                    <Elements stripe={stripePromise}>
+                        <PaymentForm
+                            onPaymentSuccess={handlePaymentSuccess}
+                            shippingAddress={shippingAddress}
+                            totalAmount={totalAmount}
+                        />
+                    </Elements>
+                </div>
+            </div>
+            <Footer />
+        </>
 	);
 };
 

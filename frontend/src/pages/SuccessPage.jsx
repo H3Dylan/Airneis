@@ -9,13 +9,22 @@ const SuccessPage = () => {
 	return (
 		<>
             <Header />
-			<h1>Commande effectuée</h1>
-			<p>
-				Votre commande a bien été enregistrée sous le numéro{" "}
-				{order.data.orderId}. Vous pouvez suivre son état depuis votre
-				espace client.
-			</p>
-			<Link to="/">Retour a l'accueil</Link>
+            <div className="flex-1">
+                <div className="flex flex-col items-center gap-4">
+                    <h2 className="text-xl font-bold mt-4 text-center">Commande effectuée</h2>
+                    <div className="w-[300px] md:w-[500px] mx-1">
+                        <p>Merci pour votre achat !</p>
+                        <br />
+                        <p>
+                            
+                            Votre commande a bien été enregistrée sous le numéro{" "}
+                            {order.data.orderId}. Vous pouvez suivre son état depuis votre
+                            espace client.
+                        </p>
+                    </div>
+                    <Link className="btn p-2 rounded-lg" to="/">Continuer mes achats</Link>
+                </div>
+            </div>
             <Footer />
 		</>
 	);

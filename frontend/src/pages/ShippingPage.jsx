@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import ShippingForm from "../components/Forms/ShippingForm";
 import Header from "../components/Header/Header";
@@ -31,8 +31,10 @@ const ShippingPage = () => {
     return (
         <>
             <Header />
-            <div>ShippingPage</div>
-            <ShippingForm userInfo={userInfo} totalAmount={totalTTC} />
+            <div>
+                <h2 className="text-xl font-bold my-4 text-center">Adresse de Livraison</h2>
+                <ShippingForm userInfo={userInfo} totalAmount={totalTTC} />
+            </div>
             <Footer />
         </>
     );
