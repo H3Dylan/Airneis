@@ -28,7 +28,7 @@ const RegisterForm = () => {
 		setError(null);
 		try {
 			const response = await axios.post(
-				"http://0.0.0.0:5050/api/auth/register",
+				"http://localhost:5050/api/auth/register",
 				formData
 			);
 			setMessage(response.data.message);

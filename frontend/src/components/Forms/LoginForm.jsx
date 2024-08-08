@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 const LoginForm = () => {
 	const [formData, setFormData] = useState({
@@ -11,6 +11,8 @@ const LoginForm = () => {
 	const [message, setMessage] = useState(null);
 	const [error, setError] = useState(null);
 	const navigate = useNavigate();
+	const location = useLocation();
+	const { login } = useAuth();
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -25,15 +27,11 @@ const LoginForm = () => {
         setMessage(null);
 		setError(null);
 		try {
-			const response = await axios.post(
-				"http://localhost:5050/api/auth/login",
-				formData
-			);
-			const token = response.data.token;
-			localStorage.setItem("token", token);
-			setMessage(response.data.message);
+			const message = await login(formData);
+			setMessage(message);
+			const redirectUrl = location.state?.from || "/";
 			setTimeout(() => {
-				navigate("/");
+				navigate(redirectUrl);
 			}, 2000);
 		} catch (error) {
 			console.error(
