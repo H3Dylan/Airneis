@@ -8,6 +8,8 @@ services:
     ports:
     # Host:Container
       - 5173:5173
+    environment:
+      VITE_STRIPE_API_PUBLIC_KEY: pk_test_51PU8LMIyqmYP3LunZgou8H8qbaHxqzKtHtWHIhDFM0zn1W5wl9Yq2eu7fDMLpCwDYMRdXc6M6RwqmOM8dOQIBmyU00fZV0WqnH
     depends_on:
       - db
     volumes:
@@ -22,7 +24,9 @@ services:
     ports:
       - 5050:5050
     environment:
-      DB_URL: mongodb://db:27017/airneisDB
+      MONGODB_URI: mongodb://db:27017/airneisDB
+      JWT_SECRET_KEY: xDU6._Ak<=W!xV6FkNr2`2(sbG7jPMn1*P'ZR_W<ayRiB4#8~TVaU{OR}D?ufa2
+      STRIPE_SECRET_KEY: sk_test_51PU8LMIyqmYP3Lunk4O95YckS3YboRQNPxoBYcZ5m5FUk8zyqcMKs3PXMS3WtLWGjK0IJPKhXuFkYnaQWyDUNcw000EvTXH5x2
     depends_on:
       - db
   db:
