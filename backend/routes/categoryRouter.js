@@ -1,16 +1,16 @@
-const express = require('express');
+import express from "express";
+import getAllCategoriesController from "../controller/category/getAllCategoriesController.js";
+import getCategoryController from "../controller/category/getCategoryController.js";
+import createCategoryController from "../controller/category/createCategoryController.js";
+import updateCategoryController from "../controller/category/updateCategoryController.js";
+import deleteCategoryController from "../controller/category/deleteCategoryController.js";
+
 const router = express.Router();
 
-const getAllCategoriesController = require('../controller/category/getAllCategoriesController');
-const getCategoryController = require('../controller/category/getCategoryController');
-const createCategoryController = require('../controller/category/createCategoryController');
-const updateCategoryController = require('../controller/category/updateCategoryController');
-const deleteCategoryController = require('../controller/category/deleteCategoryController');
+router.get("/", getAllCategoriesController);
+router.get("/:id", getCategoryController);
+router.post("/create", createCategoryController);
+router.put("/update/:id", updateCategoryController);
+router.delete("/delete/:id", deleteCategoryController);
 
-router.get('/', getAllCategoriesController);
-router.get('/:id', getCategoryController);
-router.post('/create', createCategoryController);
-router.put('/update/:id', updateCategoryController);
-router.delete('/delete/:id', deleteCategoryController);
-
-module.exports = router;
+export default router;

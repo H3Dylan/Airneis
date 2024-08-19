@@ -1,11 +1,9 @@
-const express = require("express");
-const userModel = require("../../../model/user");
-const shippingAddressSchema = require("../../../model/shippingAdress");
+import userModel from "../../../model/user.js";
 
 const updateShippingAddressController = async (request, response) => {
 	const userId = request.params.userId;
 	const newAddress = request.body;
-	console.log(newAddress);
+
 	try {
 		const user = await userModel.findById(userId);
 
@@ -58,4 +56,4 @@ const updateShippingAddressController = async (request, response) => {
 	}
 };
 
-module.exports = updateShippingAddressController;
+export default updateShippingAddressController;

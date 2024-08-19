@@ -1,8 +1,8 @@
-const mongoose = require("mongoose");
-const { faker } = require('@faker-js/faker');
-const Article = require("./model/article");
-const Category = require("./model/category");
-require("dotenv").config();
+import mongoose from "mongoose";
+import { faker } from "@faker-js/faker";
+import Article from "./model/article.js";
+import Category from "./model/category.js";
+import "dotenv/config";
 
 const seedDB = async () => {
 	await mongoose.connect(process.env.MONGODB_URI);
@@ -47,7 +47,7 @@ const seedDB = async () => {
 
 	console.log("Database seeded successfully!");
 	mongoose.connection.close();
-    console.log("seedDB is deconnected to MongoDB")
+	console.log("seedDB is deconnected to MongoDB");
 };
 
 seedDB().catch((err) => {
@@ -55,4 +55,4 @@ seedDB().catch((err) => {
 	mongoose.connection.close();
 });
 
-module.exports = seedDB;
+export default seedDB;

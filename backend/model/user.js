@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
-const shippingAddressSchema = require("./shippingAdress.js");
-const creditCardSchema = require("./creditCard.js");
+import mongoose from "mongoose";
+import bcrypt from "bcrypt";
+import shippingAddressSchema from "./shippingAdress.js";
+import creditCardSchema from "./creditCard.js";
 
 const Schema = mongoose.Schema;
 
@@ -47,4 +47,4 @@ userSchema.pre("save", async function (next) {
 
 const User = mongoose.model("user", userSchema);
 
-module.exports = User;
+export default User;
