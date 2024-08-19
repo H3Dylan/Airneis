@@ -1,10 +1,10 @@
-const express = require("express");
-const router = express.Router();
+import express from 'express';
+import getUserController from "../controller/user/getUserController.js";
+import updateShippingAddressController from "../controller/user/shipping_address/updateShippingAddressController.js";
+import getCreditCardController from "../controller/user/credit_card/getCreditCardController.js";
 
-const getUserController = require("../controller/user/getUserController");
-const updateShippingAddressController = require("../controller/user/shipping_address/updateShippingAddressController");
-const getCreditCardController = require("../controller/user/credit_card/getCreditCardController");
+const router = express.Router();
 
 router.get("/:id", getUserController);
 
-module.exports = router;
+export default router;

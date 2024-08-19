@@ -1,5 +1,5 @@
-const UserSchema = require("../../../model/user");
-const shippingAddressSchema = require("../../model/shippingAddress");
+import UserSchema from "../../../model/user.js";
+import shippingAddressSchema from "../../model/shippingAddress.js";
 
 const addShippingAddressController = async (userId, shippingData) => {
 	try {
@@ -40,4 +40,4 @@ const addShippingAddressController = async (userId, shippingData) => {
 	}
 };
 
-module.exports = addShippingAddressController;
+export default addShippingAddressController;

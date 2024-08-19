@@ -1,11 +1,12 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+
 const Schema = mongoose.Schema;
 
 const shippingAddressSchema = new Schema({
-    label: {
-        type: String,
-        required: true,
-    },
+	label: {
+		type: String,
+		required: true,
+	},
 	firstName: {
 		type: String,
 		required: true,
@@ -44,4 +45,4 @@ const shippingAddressSchema = new Schema({
 	},
 });
 
-module.exports = shippingAddressSchema;
+export default shippingAddressSchema;

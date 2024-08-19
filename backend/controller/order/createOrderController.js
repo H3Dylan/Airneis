@@ -1,5 +1,5 @@
-const OrderModel = require("../../model/order");
-const ArticleModel = require("../../model/article");
+import OrderModel from "../../model/order.js";
+import ArticleModel from "../../model/article.js";
 
 function generateUniqueOrderId() {
 	return "ORD-" + Date.now() + "-" + Math.floor(Math.random() * 10000);
@@ -36,21 +36,21 @@ const createOrderController = async (request, response) => {
 			userId,
 			articles,
 			shippingAddress,
-			totalAmount
+			totalAmount,
 		});
 
 		await order.save();
 		response.status(201).json({
 			success: true,
 			message: "Order created successfully",
-			data: order
+			data: order,
 		});
 	} catch (error) {
 		response.status(500).json({
 			success: false,
-			error: "Internal server error"
+			error: "Internal server error",
 		});
 	}
 };
 
-module.exports = createOrderController;
+export default createOrderController;

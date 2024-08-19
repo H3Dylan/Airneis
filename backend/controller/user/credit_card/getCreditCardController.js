@@ -1,5 +1,7 @@
 // const userModel = require('../../../model/user');
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+import Stripe from 'stripe';
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 const getCreditCardController = async (request, response) => {
     try {
@@ -18,4 +20,4 @@ const getCreditCardController = async (request, response) => {
     }
 };
 
-module.exports = getCreditCardController;
+export default getCreditCardController;
