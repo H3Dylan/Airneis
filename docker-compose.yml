@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  web:
+    working_dir: /app
+    build: 
+      context: ./frontend
+    ports:
+    # Host:Container
+      - 5173:5173
+    environment:
+      VITE_STRIPE_API_PUBLIC_KEY: pk_test_51PU8LMIyqmYP3LunZgou8H8qbaHxqzKtHtWHIhDFM0zn1W5wl9Yq2eu7fDMLpCwDYMRdXc6M6RwqmOM8dOQIBmyU00fZV0WqnH
+    depends_on:
+      - db
+    volumes:
+      - "./frontend:/app"
+      - "/app/node_modules"
+  api:
+    build:
+      context: ./backend
+    volumes:
+      - ./backend:/app
+      - "/app/node_modules"
+    ports:
+      - 5050:5050
+    environment:
+      MONGODB_URI: mongodb://db:27017/airneisDB
+      JWT_SECRET_KEY: xDU6._Ak<=W!xV6FkNr2`2(sbG7jPMn1*P'ZR_W<ayRiB4#8~TVaU{OR}D?ufa2
+      STRIPE_SECRET_KEY: sk_test_51PU8LMIyqmYP3Lunk4O95YckS3YboRQNPxoBYcZ5m5FUk8zyqcMKs3PXMS3WtLWGjK0IJPKhXuFkYnaQWyDUNcw000EvTXH5x2
+    depends_on:
+      - db
+  db:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - database:/data/db
+  mongo-express:
+    image: mongo-express
+    ports:
+      - 8080:8081
+    environment:
+      ME_CONFIG_MONGODB_SERVER: db
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_BASICAUTH_USERNAME: root
+      ME_CONFIG_BASICAUTH_PASSWORD: root
+    depends_on:
+      - db
+
+
+volumes:
+  database:
