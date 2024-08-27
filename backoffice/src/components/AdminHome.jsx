@@ -1,103 +1,125 @@
-// src/components/AdminHome.jsx
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Line, Bar } from 'recharts'; // Utiliser Recharts pour les graphiques
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import {
+    LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
+    PieChart, Pie, Cell
+} from 'recharts';
+
+// Données de test pour les 7 derniers jours
+const dailyData = [
+    { name: '2024-08-20', total: 500 },
+    { name: '2024-08-21', total: 600 },
+    { name: '2024-08-22', total: 550 },
+    { name: '2024-08-23', total: 700 },
+    { name: '2024-08-24', total: 400 },
+    { name: '2024-08-25', total: 650 },
+    { name: '2024-08-26', total: 750 },
+];
+
+// Données de test pour les 5 dernières semaines
+const weeklyData = [
+    { name: 'Semaine 1', total: 3000 },
+    { name: 'Semaine 2', total: 3200 },
+    { name: 'Semaine 3', total: 2800 },
+    { name: 'Semaine 4', total: 3500 },
+    { name: 'Semaine 5', total: 4000 },
+];
+
+// Données de test pour les ventes par produit
+const productData = {
+    daily: [
+        { name: 'Produit A', total: 1200 },
+        { name: 'Produit B', total: 800 },
+        { name: 'Produit C', total: 900 },
+        { name: 'Produit D', total: 600 },
+    ],
+    weekly: [
+        { name: 'Produit A', total: 6000 },
+        { name: 'Produit B', total: 4000 },
+        { name: 'Produit C', total: 4500 },
+        { name: 'Produit D', total: 3000 },
+    ],
+};
 
 const AdminHome = () => {
-    const [dailySales, setDailySales] = useState({ dates: [], totals: [] });
-    const [weeklySales, setWeeklySales] = useState({ weeks: [], totals: [] });
+    const [period, setPeriod] = useState('daily'); // 'daily' ou 'weekly'
 
-    useEffect(() => {
-        // Charger les ventes quotidiennes
-        const fetchDailySales = async () => {
-            try {
-                const response = await axios.get('http://localhost:5050/api/orders/daily-sales');
-                setDailySales(response.data.data);
-            } catch (error) {
-                console.error('Error fetching daily sales:', error);
-            }
-        };
+    const handlePeriodChange = (event) => {
+        setPeriod(event.target.value);
+    };
 
-        // Charger les ventes hebdomadaires
-        const fetchWeeklySales = async () => {
-            try {
-                const response = await axios.get('http://localhost:5050/api/orders/weekly-sales');
-                setWeeklySales(response.data.data);
-            } catch (error) {
-                console.error('Error fetching weekly sales:', error);
-            }
-        };
-
-        fetchDailySales();
-        fetchWeeklySales();
-    }, []);
+    const salesData = period === 'daily' ? dailyData : weeklyData;
+    const productChartData = productData[period];
 
     return (
-        <div>
+        <div style={{ padding: '20px' }}>
             <h1>Admin Dashboard</h1>
-            <nav>
-                <ul>
-                    <li><Link to="/admin/categories">Manage Categories</Link></li>
-                    <li><Link to="/admin/articles">Manage Articles</Link></li>
-                    <li><Link to="/admin/orders">Manage Orders</Link></li>
-                </ul>
+            <nav style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <Link to="/admin/categories" style={linkStyle}>
+                    Manage Categories
+                </Link>
+                <Link to="/admin/articles" style={linkStyle}>
+                    Manage Articles
+                </Link>
+                <Link to="/admin/orders" style={linkStyle}>
+                    Manage Orders
+                </Link>
             </nav>
-            <div>
-                <h2>Sales - Last 7 Days</h2>
-                <Bar
-                    data={{
-                        labels: dailySales.dates,
-                        datasets: [
-                            {
-                                label: 'Total Sales',
-                                data: dailySales.totals,
-                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                borderWidth: 1,
-                            }
-                        ]
-                    }}
-                    options={{
-                        scales: {
-                            x: {
-                                beginAtZero: true
-                            },
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }}
-                />
+            <div style={{ marginTop: '20px' }}>
+                <label htmlFor="period-selector" style={{ marginRight: '10px' }}>Select Period:</label>
+                <select
+                    id="period-selector"
+                    value={period}
+                    onChange={handlePeriodChange}
+                    style={{ padding: '5px' }}
+                >
+                    <option value="daily">Last 7 Days</option>
+                    <option value="weekly">Last 5 Weeks</option>
+                </select>
             </div>
-            <div>
-                <h2>Sales - Last 5 Weeks</h2>
-                <Bar
-                    data={{
-                        labels: weeklySales.weeks,
-                        datasets: [
-                            {
-                                label: 'Total Sales',
-                                data: weeklySales.totals,
-                                backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                                borderColor: 'rgba(153, 102, 255, 1)',
-                                borderWidth: 1,
-                            }
-                        ]
-                    }}
-                    options={{
-                        scales: {
-                            x: {
-                                beginAtZero: true
-                            },
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }}
-                />
+            <div style={{ marginTop: '20px', width: '100%', height: 400 }}>
+                <ResponsiveContainer>
+                    <LineChart data={salesData}>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="name" />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <Line type="monotone" dataKey="total" stroke="#8884d8" />
+                    </LineChart>
+                </ResponsiveContainer>
+            </div>
+            <div style={{ marginTop: '20px', width: '100%', height: 400 }}>
+                <ResponsiveContainer>
+                    <PieChart>
+                        <Pie
+                            data={productChartData}
+                            dataKey="total"
+                            nameKey="name"
+                            outerRadius={150}
+                            label
+                        >
+                            {productChartData.map((entry, index) => (
+                                <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+                            ))}
+                        </Pie>
+                        <Tooltip />
+                    </PieChart>
+                </ResponsiveContainer>
             </div>
         </div>
     );
 };
+
+const linkStyle = {
+    padding: '10px',
+    backgroundColor: '#007bff',
+    color: 'white',
+    textDecoration: 'none',
+    borderRadius: '5px',
+    textAlign: 'center'
+};
+
+const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
 export default AdminHome;

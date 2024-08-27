@@ -6,6 +6,7 @@ import NotFoundPage from "../pages/NotFoundPage.jsx";
 import AllCategoriesPage from "../pages/AllCategoriesPage.jsx";
 import AllProductsPage from "../pages/AllProductsPage.jsx";
 import ProductPage from "../pages/ProductPage.jsx";
+import ProductsByCategoryPage from "../pages/ProductsByCategoryPage.jsx"; // Ajouté pour la page des produits par catégorie
 import CartPage from "../pages/CartPage.jsx";
 
 const router = createBrowserRouter([
@@ -35,10 +36,15 @@ const router = createBrowserRouter([
 		errorElement: <NotFoundPage />,
 	},
 	{
-		path: "/product/:product_id",
+		path: "/product/:productId",
 		element: <ProductPage />,
 		errorElement: <NotFoundPage />,
 	},
+    {
+        path: "/category/:categoryId", // Route pour les produits par catégorie
+        element: <ProductsByCategoryPage />,
+        errorElement: <NotFoundPage />
+    },
     {
         path: "/cart",
         element: <CartPage />,

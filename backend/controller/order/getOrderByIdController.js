@@ -1,4 +1,3 @@
-// src/controller/order/getOrderByIdController.js
 const OrderModel = require('../../model/order');
 
 const getOrderByIdController = async (request, response) => {

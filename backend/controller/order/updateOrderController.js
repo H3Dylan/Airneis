@@ -1,4 +1,3 @@
-// src/controller/order/updateOrderController.js
 const OrderModel = require('../../model/order');
 
 const updateOrderController = async (request, response) => {

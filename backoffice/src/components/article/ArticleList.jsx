@@ -1,4 +1,3 @@
-// src/components/ArticleList.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
@@ -41,7 +40,7 @@ const ArticleList = () => {
                 selectedArticles.map(id => axios.delete(`http://localhost:5050/api/articles/delete/${id}`))
             );
             setArticles(prevArticles => prevArticles.filter(article => !selectedArticles.includes(article._id)));
-            setSelectedArticles([]); // Clear selected articles after deletion
+            setSelectedArticles([]); 
         } catch (error) {
             console.error('Error deleting articles:', error);
         }

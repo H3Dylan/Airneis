@@ -1,4 +1,3 @@
-// src/components/order/EditOrder.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useHistory } from 'react-router-dom';
@@ -15,7 +14,6 @@ const EditOrder = () => {
     const history = useHistory();
 
     useEffect(() => {
-        // Fetch the order data
         const fetchOrder = async () => {
             try {
                 const response = await axios.get(`http://localhost:5050/api/orders/${id}`);
@@ -29,7 +27,6 @@ const EditOrder = () => {
             }
         };
 
-        // Fetch articles for selection
         const fetchArticles = async () => {
             try {
                 const response = await axios.get('http://localhost:5050/api/articles');

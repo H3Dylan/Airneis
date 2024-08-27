@@ -1,4 +1,3 @@
-// src/components/CreateOrder.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
@@ -13,7 +12,6 @@ const CreateOrder = () => {
     const history = useHistory();
 
     useEffect(() => {
-        // Fetch articles for selection
         const fetchArticles = async () => {
             try {
                 const response = await axios.get('http://localhost:5050/api/articles');
@@ -44,7 +42,7 @@ const CreateOrder = () => {
                 articles,
                 totalPrice
             });
-            history.push('/admin/orders'); // Redirection après succès
+            history.push('/admin/orders');
         } catch (error) {
             console.error('Error creating order:', error);
         }

@@ -6,14 +6,14 @@ const createOrderController = require('../controller/order/createOrderController
 const getAllOrdersController = require('../controller/order/getAllOrdersController');
 const updateOrderController = require('../controller/order/updateOrderController');
 const getOrderByIdController = require('../controller/order/getOrderByIdController');
-const getOrderByDayController = require('../controller/order/getOrderByDayController');
-const getOrderByWeekController = require('../controller/order/getOrderByWeekController');
+const getOrderByDateController = require('../controller/order/getOrderByDateController');
 
 router.post('/create', createOrderController);
 router.get('/', getAllOrdersController);
 router.put('/update/:id', updateOrderController);
 router.get('/:id', getOrderByIdController); 
-router.get('/daily-sales', getOrderByDayController);
-router.get('/weekly-sales', getOrderByWeekController);
+router.get('/date/:date', getOrderByDateController);
+
+
 
 module.exports = router;

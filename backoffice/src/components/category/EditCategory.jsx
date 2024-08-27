@@ -1,4 +1,3 @@
-// src/components/EditCategory.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory, useParams } from 'react-router-dom';

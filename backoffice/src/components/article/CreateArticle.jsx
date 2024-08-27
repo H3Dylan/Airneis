@@ -1,4 +1,3 @@
-// src/components/CreateArticle.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
@@ -25,7 +24,7 @@ const CreateArticle = () => {
         try {
             const response = await axios.post('http://localhost:5050/api/articles/create', newArticle);
             console.log(response.data);
-            history.push('/admin/articles'); // Redirige vers la page de liste des articles
+            history.push('/admin/articles'); 
         } catch (error) {
             console.error('Error creating article:', error);
         }

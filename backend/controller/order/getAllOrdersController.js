@@ -1,13 +1,10 @@
-// src/controller/order/getAllOrdersController.js
 const orderModel = require('../../model/order');
-const articleModel = require('../../model/article'); // Assurez-vous d'importer votre modèle d'article
+const articleModel = require('../../model/article'); 
 
 const getAllOrdersController = async (req, res) => {
     try {
-        // Récupérer toutes les commandes
         const orders = await orderModel.find();
 
-        // Peupler les articles dans chaque commande
         const populatedOrders = await Promise.all(orders.map(async (order) => {
             const articles = await Promise.all(order.articles.map(async (item) => {
                 const article = await articleModel.findById(item.articleId);

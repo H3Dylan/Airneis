@@ -1,4 +1,4 @@
-// src/App.jsx
+// App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ArticleList from './components/article/ArticleList';
@@ -11,7 +11,6 @@ import OrderList from './components/order/OrderList';
 import CreateOrder from './components/order/CreateOrder';
 import EditOrder from './components/order/EditOrder';
 import AdminHome from './components/AdminHome';
-import TestChart from './components/TestChart';
 
 const App = () => {
     return (
@@ -27,7 +26,6 @@ const App = () => {
                 <Route path="/admin/orders/edit/:id" component={EditOrder} />
                 <Route path="/admin/orders" component={OrderList} />
                 <Route path="/admin" exact component={AdminHome} />
-                <Route path="/test-chart" component={TestChart} />
             </Switch>
         </Router>
     );
