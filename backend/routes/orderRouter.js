@@ -13,6 +13,4 @@ router.put('/update/:id', updateOrderController);
 router.get('/:id', getOrderByIdController); 
 router.get('/date/:date', getOrderByDateController);
 
-
-
 export default router;
